@@ -82,17 +82,19 @@ kbd {
 }
 
 @media only screen and (max-width: 64rem) {
+  .body{
+    background: rgb(252, 218, 190);
+  }
+
   .wrapper{
     flex-flow: column;
   }
 
   .col{
     flex-flow: row nowrap;
-    background: rgb(252, 218, 190);
   }
 
   #left{
-    order: 0;
     display: none;
   }
 
