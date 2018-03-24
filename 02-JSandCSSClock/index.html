@@ -20,7 +20,7 @@
   <style>
 
     html {
-      background:rgb(245, 247, 248) url(https://www.toptal.com/designers/subtlepatterns/patterns/doodles.png);
+      background:rgb(245, 247, 248) url(https://www.toptal.com/designers/subtlepatterns/patterns/concrete-texture.png);
       font-family:'helvetica neue';
       text-align: center;
       font-size: 10px;
@@ -45,9 +45,9 @@
       padding:2rem;
       box-shadow:
         0 0 0 4px rgba(0,0,0,0.1),
-        inset 0 0 0 3px #EFEFEF,
-        inset 0 0 10px black,
-        0 0 10px rgba(0,0,0,0.2);
+        inset 0 0 0 7px #EFEFEF,
+        inset 0 0 10px 6px black,
+        0px 11px 15px 5px rgba(0, 0, 0, 0.29);
     }
 
     .clock-face {
@@ -65,6 +65,7 @@
       top:50%;
       transform-origin: 85%;
       transform: rotate(90deg) ;
+      border-radius: 40%;
       /*transition: all 0.05s;*/
       transition-timing-function: cubic-bezier(0, 2.68, 1, 1);
     }
@@ -72,6 +73,17 @@
     .second-hand {
       background: red;
       height: 4px;
+    }
+
+    .second-hand::before {
+      content: '';
+      height: 14px;
+      width: 14px;
+      border-radius: 50%;
+      position: absolute;
+      bottom: -5px;
+      right: 18px;
+      background: #BADA55;
     }
 
     .hour-hand {
