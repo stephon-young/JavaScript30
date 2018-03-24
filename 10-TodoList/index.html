@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Todo List - JavaScript30 Challenge  | Yasir Janjua</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="This is a Todo List created in vanilla javascript without help of any library. You can store items temprarily + hold Shift to Check Multiple Checkboxes. It is made by Yasir Janjua as a JavaScript 30 Day Challenge.">
+  <meta name="keywords" content="Todo List, Todo List in Action, Vanilla JavaScript , Yasir Janjua, Web Developer, JavaScript30 Challenge">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Yasir Janjua">
+  <meta name="language" content="English">
+</head>
+<body>
+  <style>
+
+    html {
+      font-family: sans-serif;
+      background:rgb(235, 235, 236);
+    }
+
+    .heading{
+      padding: 0px 0;
+      font-family: serif;
+      color: #616161;
+      max-width: 500px;
+      margin: 30px auto;
+      border-radius: 5px;
+    }
+
+    .heading h1{
+      text-align: center;
+    }
+
+    .inbox {
+      max-width:400px;
+      margin:auto;
+      background:white;
+      border-radius:5px;
+      box-shadow:10px 10px 19px rgba(0,0,0,0.1);
+    }
+
+    .todo-item{
+      display:flex;
+      align-items:center;
+      border-bottom: 1px solid #F1F1F1;
+    }
+
+    .item {
+      display:flex;
+      align-items:center;
+      border-bottom: 1px solid #F1F1F1;
+    }
+
+    .item:last-child {
+      border-bottom:0;
+    }
+
+    .item::after{
+      content: '\00d7';
+      position: relative;
+      padding: 0 4px;
+      border-radius: 5px;
+      right: 10px;
+      top: -15px;
+      color: #e5e2e2;
+    }
+
+    .item:hover::after,
+    .item:active::after,
+    .item:focus::after{
+      background: rgb(243, 222, 229);
+      color: #000;
+    }
+
+    input:checked + p {
+      background:#F9F9F9;
+      text-decoration: line-through;
+    }
+
+    input[type="checkbox"] {
+      margin:20px;
+      height: 15px;
+      width: 15px;
+    }
+
+    p {
+      margin:0;
+      padding:20px;
+      transition:background 0.2s;
+      flex:1;
+      font-family:'helvetica neue';
+      font-size: 20px;
+      font-weight: 200;
+      border-left: 1px solid rgb(252, 162, 162);
+    }
+
+    span.remove{
+      height: 15px;
+      width: 17px;
+      position: relative;
+      top: -15px;
+      right: -7px;
+      z-index: 50;
+    }
+
+    #todo{
+      padding:20px;
+      transition:background 0.2s;
+      flex:1;
+      font-family:'helvetica neue';
+      font-size: 20px;
+      font-weight: 200;
+      border: 0;
+      border-left: 1px solid rgb(252, 162, 162);
+    }
+
+    .empty{
+      margin:20px;
+      height: 15px;
+      width: 15px;
+    }
+
+  </style>
+   <!--
+   The following is a common layout you would see in an email client.
+
+   When a user clicks a checkbox, holds Shift, and then clicks another checkbox a few rows down, all the checkboxes inbetween those two checkboxes should be checked.
+
+  -->
+  <header class="heading">
+    <h1>Todo List</h1>
+  </header>
+  <main class="inbox">
+    <div class="todo-item">
+      <div class="empty"></div>
+      <input type="text" name="todo" id="todo">
+    </div>
+    <div class="item">
+      <input type="checkbox">
+      <p contenteditable>This is an inbox layout.</p>
+      <span class="remove"></span>
+    </div>
+    <div class="item">
+      <input type="checkbox">
+      <p contenteditable>Check one item</p>
+      <span class="remove"></span>
+    </div>
+    <div class="item">
+      <input type="checkbox">
+      <p contenteditable>Hold down your Shift key</p>
+      <span class="remove"></span>
+    </div>
+  </main>
+
+<script>
+  const inbox = document.querySelector('.inbox');
+  const todo = document.getElementById('todo');
+  let checkboxes = document.querySelectorAll('.item input[type="checkbox"]');
+  let removeBtns = document.querySelectorAll('span.remove');
+  let lastChecked;
+
+  function markCheck(e){
+    let inBetween = false;
+
+    if(e.shiftKey && this.checked){
+      checkboxes.forEach(checkbox => {
+        if(checkbox === this || checkbox === lastChecked){
+          inBetween = !inBetween;
+        }
+        if(inBetween && !checkbox.checked) {checkbox.checked = true};
+      });
+    }
+    lastChecked = this;
+  }
+
+  function addItem(e){
+    e.preventDefault;
+
+    if(e.keyCode === 13 && todo.value){
+      const item = document.createElement('div');
+      item.setAttribute('class','item');
+      item.innerHTML = `
+      <input type="checkbox">
+      <p contenteditable>${todo.value}</p>
+      <span class="remove"></span>
+      `;
+      todo.value = '';
+      inbox.appendChild(item);
+
+      updateDOM();
+    }
+  }
+
+  function remove(e){
+    e.preventDefault;
+    this.parentElement.remove();
+  }
+
+  function updateDOM(){
+    removeBtns = document.querySelectorAll('span.remove');
+    checkboxes = document.querySelectorAll('.item input[type="checkbox"]');
+
+    removeBtns.forEach(btn => btn.addEventListener('click', remove));
+    checkboxes.forEach(checkbox => checkbox.addEventListener('click', markCheck));
+  }
+
+  todo.addEventListener('keyup', addItem);
+  removeBtns.forEach(btn => btn.addEventListener('click', remove));
+  checkboxes.forEach(checkbox => checkbox.addEventListener('click', markCheck));
+</script>
+</body>
+</html>
