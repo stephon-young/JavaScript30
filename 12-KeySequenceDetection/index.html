@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Key Sequence Detection - JavaScript30 Challenge | Yasir Janjua</title>
+  <meta name="description" content="This is an interactive javascript konami. If you enter the secret code it will initiate a key detection sequence and display the easter eggs, It is built by Yasir Janjua as a JavaScript30 Challenge.">
+  <meta name="keywords" content="JavaScript Konami code, Key sequence detection, Javascript 30 challenge, Vanilla Javascript , Yasir Janjua, Web Developer">
+  <meta name="robots" content="index, nofollow">
+  <meta name="author" content="Yasir Janjua">
+  <meta name="language" content="English">
+
+  <script type="text/javascript" src="http://www.cornify.com/js/cornify.js"></script>
+</head>
+<body>
+  <h1>Type <quote>freak</quote></h1>
+<script>
+  const secretKey = 'freak';
+  const pressed = [];
+
+  cornify_count = 0;
+  window.addEventListener('keyup', (e) => {
+    pressed.push(e.key);
+    pressed.splice(-secretKey.length - 1, pressed.length - secretKey.length);
+
+    if(pressed.join('').includes(secretKey)){
+      cornify_add();
+    }
+  });
+</script>
+</body>
+</html>
