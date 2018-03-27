@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sort Without Articles - JavaScript30 Challenge | Yasir Janjua</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="This is the JavaScript sort function demonstration. The function is used to sort different nodes of a video list based on their text irrescpective of the article. It is made by Yasir Janjua as a JavaScript30 Challenge.">
+  <meta name="keywords" content="JavaScript Sort, Sort demostration, Sort without Articles, Vanilla js, Vanilla js dynamic list update ,Yasir Janjua, Web Developer">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Yasir Janjua">
+  <meta name="language" content="English">
+</head>
+<body>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: url("https://source.unsplash.com/nDqA4d5NL0k/2000x2000");
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    #bands {
+      list-style: inside square;
+      border-radius: 5px;
+      font-size: 20px;
+      background: white;
+      width: 500px;
+      margin: 40px auto;
+      padding: 0;
+      box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.08);
+    }
+    #bands li {
+      border-bottom: 1px solid #efefef;
+      padding: 20px;
+    }
+    #bands li:last-child {
+      border-bottom: 0;
+    }
+
+    a {
+      color: #ffc600;
+      text-decoration: none;
+    }
+
+  </style>
+
+  <ul id="bands"></ul>
+
+<script>
+const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
+
+function strip(name) {
+  return name.replace(/^(a |the |an )/i,'').trim();
+}
+
+const sortedBands = bands.sort((first, next) => strip(first) > strip(next) ? 1 : -1);
+
+const el = document.getElementById('bands');
+
+el.innerHTML = sortedBands.map(band => `<li>${band}</li>`).join('');
+
+</script>
+
+</body>
+</html>
